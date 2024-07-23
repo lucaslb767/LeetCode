@@ -2,15 +2,32 @@ namespace Result;
 
 public class Solution {
     public int[] FrequencySort(int[] nums) {
-        /*criar dicionario
-        verificar se a key(numero) ja foi inserida e percorrer a lista
-        1)caso nao. Inserir nova key(numero) e o valor sera 1
-        2)caso sim, acrescentar aumentar o valor em 1
-        
-        ordernar as chaves pela quantidade de valores
-        criar novo array
-        
-        */
-        return null;
+
+        Dictionary<int, int> numberDict = new Dictionary<int, int>();
+        int[] result = new int[nums.Length];
+        int index = 0;
+
+        foreach(var number in nums)
+        {
+            if(numberDict.ContainsKey(number))
+            {
+                numberDict[number] += 1;
+            }
+            else
+            {
+                numberDict.Add(number, 1);
+            }
+        }
+
+        foreach (var item in numberDict.OrderByDescending(x=> x.Key).OrderBy(x => x.Value).ToList())
+        {
+
+            for(var i =0; i< item.Value; i++)
+            {
+                result[index] = item.Key;
+                index++;
+            }
+        }
+        return result;
     }
 }
